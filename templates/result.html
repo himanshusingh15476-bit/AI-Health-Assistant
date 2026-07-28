@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Health Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <div class="header">
+
+        <h1>
+            <i class="fa-solid fa-heart-pulse"></i>
+            AI Health Assistant
+        </h1>
+
+        <p>Professional AI Medical Analysis Report</p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h2>
+                <i class="fa-solid fa-user"></i>
+                Patient Information
+            </h2>
+
+            <p><strong>Name:</strong> {{ name }}</p>
+            <p><strong>Age:</strong> {{ age }}</p>
+            <p><strong>Gender:</strong> {{ gender }}</p>
+            <p><strong>Height:</strong> {{ height }} cm</p>
+            <p><strong>Weight:</strong> {{ weight }} kg</p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>
+                <i class="fa-solid fa-chart-line"></i>
+                Health Summary
+            </h2>
+
+            <p><strong>BMI:</strong> {{ bmi }}</p>
+
+            <p><strong>Status:</strong> {{ bmi_status }}</p>
+
+            <p><strong>Risk:</strong> {{ risk }}</p>
+
+            <p><strong>Health Score:</strong> {{ health_score }}/100</p>
+
+            <progress value="{{ health_score }}" max="100"></progress>
+
+        </div>
+
+    </div>
+
+   <div class="report-card">
+
+    <div class="report-header">
+
+        <i class="fa-solid fa-user-doctor report-icon"></i>
+
+        <div>
+
+            <h2>AI Medical Report</h2>
+
+            <p>Generated using Google Gemini AI</p>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="report-body">
+
+        <pre>{{ report }}</pre>
+
+    </div>
+
+</div>
+
+    <div class="buttons">
+
+<a href="{{ url_for('download', report=report) }}">
+
+<button class="pdf-btn">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+Download PDF
+
+</button>
+
+</a>
+
+<button class="copy-btn" onclick="copyReport()">
+
+<i class="fa-solid fa-copy"></i>
+
+Copy Report
+
+</button>
+
+<button class="print-btn" onclick="window.print()">
+
+<i class="fa-solid fa-print"></i>
+
+Print Report
+
+</button>
+
+<a href="/patient">
+
+<button class="again-btn">
+
+<i class="fa-solid fa-rotate"></i>
+
+Analyze Again
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function copyReport(){
+
+    navigator.clipboard.writeText(document.querySelector("pre").innerText);
+
+    alert("Report Copied Successfully!");
+
+}
+
+</script>
+
+</body>
+<footer>
+
+<hr>
+
+<p>
+
+© 2026 AI Health Assistant
+
+<br>
+
+Powered by Google Gemini AI
+
+</p>
+
+</footer>
+
+</html>
